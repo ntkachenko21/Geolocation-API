@@ -633,9 +633,6 @@ This version is focused on getting the project production-ready and implementing
 - [ ] **Advanced Filtering** - Expand search capabilities with filtering by category, rating, and other parameters
 
 ### Version 1.2 (Planned)
-[ ] Geocoding & Batch Operations: Add the ability to convert addresses to coordinates (geocoding) and perform batch data import/export.
-
-[ ] Real-time Updates: Basic support for real-time updates via WebSockets
 - [ ] **Stripe Integration** - Integrate with the Stripe payment system to manage subscriptions and paid API access
 - [ ] **Analytics Dashboard** - Usage statistics and insights
 - [ ] **Mobile SDK** - iOS and Android libraries
