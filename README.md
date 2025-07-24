@@ -7,6 +7,7 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://postgresql.org/)
 [![PostGIS](https://img.shields.io/badge/PostGIS-3.0+-007ACC?style=for-the-badge&logo=postgresql&logoColor=white)](https://postgis.net/)
 [![DRF](https://img.shields.io/badge/Django_REST-3.14+-ff1709?style=for-the-badge&logo=django&logoColor=white)](https://django-rest-framework.org/)
+[![pgAdmin](https://img.shields.io/badge/pgAdmin-4-6699cc.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.pgadmin.org/)
 
 A robust geospatial API built with Django and PostGIS that enables location-based searches, distance calculations, and geographical data management. Perfect for applications requiring proximity searches, location discovery, and spatial data analysis.
 
@@ -69,6 +70,7 @@ A robust geospatial API built with Django and PostGIS that enables location-base
 - **GeoDjango** - Geographic web framework
 
 ### Development Tools
+- **pgAdmin 4** - GUI for PostgreSQL database management
 - **python-dotenv** - Environment variable management
 - **django-cors-headers** - CORS handling
 - **Pillow** - Image processing library
@@ -265,8 +267,8 @@ SPECTACULAR_SETTINGS = {
 
 ### Interactive Documentation
 
-**🎉 [INSERT SCREENSHOT HERE: Swagger UI main page showing all available endpoints]**
-*Screenshot suggestion: Take a screenshot of `http://localhost:8000/api/docs/` showing the main Swagger interface with all endpoints listed*
+<img width="1897" height="928" alt="image" src="https://github.com/user-attachments/assets/9327129f-d808-4901-a2f1-aaba382c7cbb" />
+
 
 The API provides comprehensive interactive documentation:
 
@@ -292,44 +294,53 @@ Retrieve all published places with pagination.
 **Response Example:**
 ```json
 {
-  "count": 42,
-  "next": "http://localhost:8000/api/v1/places/?page=2",
+  "count": 3,
+  "next": null,
   "previous": null,
-  "results": [
-    {
-      "type": "Feature",
-      "id": 1,
-      "properties": {
-        "name": "Kraków Main Square",
-        "description": "Historic central square",
-        "address": "Main Market Square",
-        "city": "Kraków",
-        "country": "Poland",
-        "status": "published",
-        "created_at": "2025-01-15T10:30:00Z",
-        "created_by": {
-          "id": 1,
-          "username": "admin"
+  "results": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "id": 3,
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            21.002511974674924,
+            52.230032427858035
+          ]
         },
-        "distance": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [19.937, 50.0613]
+        "properties": {
+          "name": "Złote Tarasy",
+          "description": "The Złote Tarasy, also known by its anglicized name Golden Terraces, is a commercial, office, and entertainment complex in the city centre of Warsaw, Poland. It is located at 59 Złota Street, between Jana Pawła II and Emilii Plater.",
+          "photo": "http://127.0.0.1:8000/media/places/photos/68279bd8-e846-4b2c-9cd3-276b5125da10.jpg",
+          "address": "Złota 59, 00-120 Warszawa",
+          "city": "Warszawa",
+          "country": "Poland",
+          "status": "published",
+          "created_at": "2025-07-24T14:11:32.642611Z",
+          "updated_at": "2025-07-24T16:57:09.711254Z",
+          "created_by": {
+            "id": 1,
+            "username": "admin",
+            "first_name": "",
+            "last_name": ""
+          },
+          "distance": null
+        }
       }
-    }
-  ]
-}
 ```
 
-**🎉 [INSERT SCREENSHOT HERE: Places list response in Swagger UI]**
-*Screenshot suggestion: Execute the GET /api/v1/places/ endpoint and show the JSON response*
+<img width="1896" height="930" alt="image" src="https://github.com/user-attachments/assets/a6736105-3a03-446e-9322-cf62337d4cbb" />
+<img width="1898" height="932" alt="image" src="https://github.com/user-attachments/assets/94e73729-b83a-4071-88b5-1328a3ff58a4" />
+
+
 
 #### `GET /api/v1/places/{id}/`
 Retrieve a specific place by ID.
 
-**🎉 [INSERT SCREENSHOT HERE: Single place detail response]**
-*Screenshot suggestion: Execute GET /api/v1/places/1/ and show the detailed response*
+<img width="1895" height="933" alt="image" src="https://github.com/user-attachments/assets/fe782839-7399-4c14-a5db-afc213e44563" />
+<img width="1895" height="931" alt="image" src="https://github.com/user-attachments/assets/7206e3bb-a2ea-49b8-8493-ce8f3c70fae2" />
 
 ---
 
@@ -348,46 +359,80 @@ Find places within a specified radius from a point.
 GET /api/v1/places/search/radius/?lat=50.0613&lon=19.937&radius=5
 ```
 
-**🎉 [INSERT SCREENSHOT HERE: Radius search parameters in Swagger UI]**
-*Screenshot suggestion: Show the radius search endpoint with parameters filled in (lat=50.0613, lon=19.937, radius=5)*
-
 **Example Response:**
 ```json
 {
-  "count": 3,
-  "results": [
-    {
-      "type": "Feature",
-      "id": 1,
-      "properties": {
-        "name": "Kraków Main Square",
-        "distance": 0.0,
-        "city": "Kraków"
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "id": 1,
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            19.937350188257113,
+            50.06169156980934
+          ]
+        },
+        "properties": {
+          "name": "Kraków Old Town",
+          "description": "Kraków Old Town is the historic central area of Kraków, Poland. It is one of the most famous old areas in Poland today and was the centre of Poland's political life from 1038 until King Sigismund III Vasa relocated his court to Warsaw in 1596.",
+          "photo": "http://127.0.0.1:8000/media/places/photos/0d7386a1-72f0-4608-a57d-35116a486bd8.jpg",
+          "address": "Rynek Główny 5, 31-042 Kraków",
+          "city": "Kraków",
+          "country": "Poland",
+          "status": "published",
+          "created_at": "2025-07-24T11:32:09.715262Z",
+          "updated_at": "2025-07-24T16:57:20.200178Z",
+          "created_by": {
+            "id": 1,
+            "username": "admin",
+            "first_name": "",
+            "last_name": ""
+          },
+          "distance": 50.21
+        }
       },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [19.937, 50.0613]
+      {
+        "id": 2,
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            19.96458748254024,
+            50.050686692411375
+          ]
+        },
+        "properties": {
+          "name": "Uniwersytet im. Andrzeja Frycza Modrzewskiego",
+          "description": "Uniwersytet im. Andrzeja Frycza Modrzewskiego – polska wyższa szkoła akademicka, będąca pod względem liczby studentów największą uczelnią niepubliczną w Małopolsce oraz drugą w Polsce.",
+          "photo": "http://127.0.0.1:8000/media/places/photos/9a61422e-be86-4872-bb81-077629e275ff.jpg",
+          "address": "Gustawa Herlinga-Grudzińskiego 1D, 30-705 Kraków",
+          "city": "Kraków",
+          "country": "Poland",
+          "status": "published",
+          "created_at": "2025-07-24T11:51:30.554018Z",
+          "updated_at": "2025-07-24T16:57:15.101392Z",
+          "created_by": {
+            "id": 1,
+            "username": "admin",
+            "first_name": "",
+            "last_name": ""
+          },
+          "distance": 2296.02
+        }
       }
-    },
-    {
-      "type": "Feature", 
-      "id": 2,
-      "properties": {
-        "name": "Wawel Castle",
-        "distance": 856.32,
-        "city": "Kraków"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [19.9354, 50.0536]
-      }
-    }
-  ]
+    ]
+  }
 }
 ```
 
-**🎉 [INSERT SCREENSHOT HERE: Radius search results showing distances]**
-*Screenshot suggestion: Execute the radius search and show the response with distance calculations*
+<img width="1895" height="928" alt="image" src="https://github.com/user-attachments/assets/6117eea7-e116-416b-be0a-926deada7ff3" />
+<img width="1896" height="932" alt="image" src="https://github.com/user-attachments/assets/44433150-e91d-4219-85c9-5f06d6c834cf" />
 
 ---
 
@@ -406,16 +451,17 @@ Find places within a rectangular geographical area.
 GET /api/v1/places/search/bbox/?in_bbox=19.93,50.06,19.94,50.065&lat=50.0613&lon=19.937
 ```
 
-**🎉 [INSERT SCREENSHOT HERE: Bbox search parameters with example values]**
-*Screenshot suggestion: Show the bbox endpoint with the Kraków Main Square Area example filled in*
+<img width="1896" height="930" alt="image" src="https://github.com/user-attachments/assets/3e918bb3-c3c6-45fb-a57a-f28fa98060cb" />
+<img width="1897" height="927" alt="image" src="https://github.com/user-attachments/assets/bf5126de-8b42-4506-a6cb-159654f83270" />
+
 
 **Predefined Examples:**
 - **Kraków Main Square Area**: `19.93,50.06,19.94,50.065`
 - **Warsaw City**: `20.85,52.09,21.27,52.36`
 - **Poland (entire country)**: `14.12,49.00,24.14,54.83`
 
-**🎉 [INSERT SCREENSHOT HERE: Bbox search results for different areas]**
-*Screenshot suggestion: Execute bbox search with Warsaw coordinates and show results*
+<img width="1896" height="935" alt="image" src="https://github.com/user-attachments/assets/b39d26e5-4204-46a4-aa42-53a380d52e12" />
+<img width="1896" height="930" alt="image" src="https://github.com/user-attachments/assets/4a6b9a87-384e-4a71-9fc0-d21221186d25" />
 
 ---
 
@@ -487,40 +533,15 @@ curl -X GET "http://localhost:8000/api/v1/places/search/bbox/?in_bbox=19.93,50.0
 ```
 
 ---
+### Database Inspection
+Data integrity and geospatial queries were verified using **pgAdmin 4**, a graphical interface for PostgreSQL. This tool allowed for direct inspection of tables, execution of raw SQL queries, and visualization of GIS data.
 
-## 🧪 Testing
+<br>
 
-### Running Tests
-```bash
-# Run all tests
-python manage.py test
+<p align="center">
+  <img width="1919" height="1014" alt="image" src="https://github.com/user-attachments/assets/41e67fbf-f9c2-4ceb-878c-79f464671999" />
+</p>
 
-# Run specific app tests
-python manage.py test places
-
-# Run with coverage
-pip install coverage
-coverage run --source='.' manage.py test
-coverage report
-coverage html  # Generate HTML report
-```
-
-### Test Structure
-```
-tests/
-├── test_models.py      # Model validation tests
-├── test_views.py       # API endpoint tests  
-├── test_filters.py     # Geographic filter tests
-└── test_utils.py       # Utility function tests
-```
-
-### Sample Test Cases
-- ✅ Place model validation
-- ✅ Radius search accuracy
-- ✅ Bounding box filtering
-- ✅ Distance calculations
-- ✅ Error handling
-- ✅ Pagination functionality
 
 ---
 
@@ -598,21 +619,33 @@ CREATE INDEX places_place_location_id ON places_place USING GIST (location);
 ### Project Structure
 ```
 GeolocationAPI/
-├── 📁 GeolocationAPI/          # Project configuration
-│   ├── 📄 settings.py          # Django settings
-│   ├── 📄 urls.py             # Main URL configuration
-│   └── 📄 wsgi.py             # WSGI configuration
+├── 📁 GeolocationAPI/           # Project configuration
+│   ├── 📄 __init__.py
+│   ├── 📄 asgi.py                # ASGI config for async support
+│   ├── 📄 settings.py            # Django settings
+│   ├── 📄 urls.py                # Main URL configuration
+│   └── 📄 wsgi.py                # WSGI configuration
+├── 📁 media/                   # User-uploaded files (in future versions will be downloaded to S3)
 ├── 📁 places/                  # Main application
-│   ├── 📄 models.py           # Place model and status choices
-│   ├── 📄 serializers.py      # API serializers
-│   ├── 📄 views.py            # API views and viewsets
-│   ├── 📄 filters.py          # Geographic filters
-│   ├── 📄 urls.py             # App URL patterns
-│   └── 📄 utils.py            # Utility functions
-├── 📁 media/                   # User-uploaded files
-├── 📄 requirements.txt         # Python dependencies
-├── 📄 .env.example            # Environment template
-└── 📄 manage.py               # Django management script
+│   ├── 📁 migrations/          # Database migrations
+│   ├── 📄 __init__.py
+│   ├── 📄 admin.py               # Django admin configuration
+│   ├── 📄 apps.py                # App configuration
+│   ├── 📄 filters.py             # Geographic filters
+│   ├── 📄 models.py              # Place model and status choices
+│   ├── 📄 serializers.py        # API serializers
+│   ├── 📄 tests.py                # Application tests
+│   ├── 📄 urls.py               # App URL patterns
+│   ├── 📄 utils.py                # Utility functions
+│   └── 📄 views.py              # API views and viewsets
+├── 📄 .env                     # Local environment variables (untracked)
+├── 📄 .env.example             # Environment template
+├── 📄 .gitignore                # Git ignore rules
+├── 📄 .pre-commit-config.yaml    # Pre-commit hook configuration
+├── 📄 db.sqlite3                # Development database
+├── 📄 manage.py                # Django management script
+├── 📄 pyproject.toml            # Project metadata and dependencies
+└── 📄 requirements.txt          # Python dependencies
 ```
 
 ### Data Flow
@@ -639,139 +672,32 @@ graph TD
 - ✅ **CORS Configuration** - Controlled cross-origin access
 - ✅ **Error Handling** - No sensitive data exposure
 
-### Production Security Checklist
-- [ ] Enable HTTPS/SSL
-- [ ] Add API authentication
-- [ ] Implement rate limiting
-- [ ] Set up monitoring/logging
-- [ ] Configure firewall rules
-- [ ] Regular security updates
-
----
-
-## 🚀 Deployment
-
-### Docker Deployment
-```dockerfile
-# Dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-COPY . .
-EXPOSE 8000
-
-CMD ["gunicorn", "GeolocationAPI.wsgi:application", "--bind", "0.0.0.0:8000"]
-```
-
-```yaml
-# docker-compose.yml
-version: '3.8'
-services:
-  db:
-    image: postgis/postgis:13-3.1
-    environment:
-      POSTGRES_DB: geolocation_db
-      POSTGRES_USER: geo_user
-      POSTGRES_PASSWORD: password
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-  web:
-    build: .
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-    environment:
-      - DATABASE_URL=postgres://geo_user:password@db:5432/geolocation_db
-
-volumes:
-  postgres_data:
-```
-
-### Production Settings
-```python
-# production_settings.py
-import os
-from .settings import *
-
-DEBUG = False
-ALLOWED_HOSTS = ['your-domain.com']
-
-# Security
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = 31536000
-SECURE_HSTS_PRELOAD = True
-
-# Database with connection pooling
-DATABASES['default']['CONN_MAX_AGE'] = 60
-```
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Here's how to get started:
-
-### Development Setup
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Make your changes
-4. Add tests for new functionality
-5. Run tests: `python manage.py test`
-6. Commit changes: `git commit -m 'Add amazing feature'`
-7. Push to branch: `git push origin feature/amazing-feature`
-8. Open a Pull Request
-
-### Code Style
-- Follow PEP 8 guidelines
-- Use type hints where possible
-- Add docstrings for new functions
-- Maintain test coverage above 80%
-
-### Commit Message Format
-```
-type(scope): description
-
-body
-
-footer
-```
-
-Example:
-```
-feat(places): add radius search validation
-
-Add coordinate range validation for latitude and longitude
-parameters in radius search filter.
-
-Closes #123
-```
-
 ---
 
 ## 📈 Roadmap
 
 ### Version 1.1 (Coming Soon)
-- [ ] **Authentication System** - JWT and API key support
-- [ ] **Advanced Filtering** - Search by category, rating, etc.
-- [ ] **Batch Operations** - Import/export multiple places
-- [ ] **Rate Limiting** - API usage quotas
+This version is focused on getting the project production-ready and implementing a robust authentication system
+- [ ] **Comprehensive Test Suite** - Significantly expand test coverage, including integration and load tests, to ensure maximum reliability
+- [ ] **Production-Ready Deployment** - Complete the full transition to Docker with a production-ready docker-compose setup, multi-stage builds, and health checks
+- [ ] **Advanced Authentication** - Implement full OAuth 2.0 support for secure login via third-party providers (e.g., Google, GitHub)
+- [ ] **Rate Limiting** - Introduce API usage quotas to control load and prevent abuse
+- [ ] **Advanced Filtering** - Expand search capabilities with filtering by category, rating, and other parameters
 
 ### Version 1.2 (Planned)
-- [ ] **Real-time Updates** - WebSocket notifications
-- [ ] **Geocoding Integration** - Address to coordinates conversion
+[ ] Geocoding & Batch Operations: Add the ability to convert addresses to coordinates (geocoding) and perform batch data import/export.
+
+[ ] Real-time Updates: Basic support for real-time updates via WebSockets
+- [ ] **Stripe Integration** - Integrate with the Stripe payment system to manage subscriptions and paid API access
 - [ ] **Analytics Dashboard** - Usage statistics and insights
 - [ ] **Mobile SDK** - iOS and Android libraries
+- [ ] **Geocoding & Batch Operations** - Add the ability to convert addresses to coordinates (geocoding) and perform batch data import/export
 
 ### Version 2.0 (Future)
-- [ ] **Machine Learning** - Location recommendations
-- [ ] **Multi-tenant Support** - Organization-based access
-- [ ] **Advanced Analytics** - Heat maps and usage patterns
-- [ ] **GraphQL API** - Alternative query interface
+- [ ] **Machine Learning** - Implement ML models for personalized recommendations of nearby places
+- [ ] **Multi-tenant Support** - Support for multiple organizations within a single installation
+- [ ] **Advanced Analytics** - An analytics dashboard featuring advanced insights, including heat maps and usage pattern analysis
+- [ ] **GraphQL API** - Provide an alternative GraphQL API endpoint for more flexible client-side queries
 
 ---
 
@@ -834,7 +760,6 @@ SOFTWARE.
 - **Django Team** - For the amazing web framework
 - **PostGIS Community** - For powerful spatial database capabilities  
 - **Django REST Framework** - For the excellent API toolkit
-- **Contributors** - Everyone who helps improve this project
 
 ---
 
@@ -844,7 +769,7 @@ SOFTWARE.
 
 **🍴 Fork it to create your own version!**
 
-**🐛 Report bugs to help us improve!**
+**🐛 Report bugs to help me improve!**
 
 ---
 
