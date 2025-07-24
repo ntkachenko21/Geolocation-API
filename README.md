@@ -24,9 +24,7 @@ A robust geospatial API built with Django and PostGIS that enables location-base
 - [📖 API Documentation](#-api-documentation)
 - [🔍 API Endpoints](#-api-endpoints)
 - [💻 Usage Examples](#-usage-examples)
-- [🧪 Testing](#-testing)
 - [📊 Performance](#-performance)
-- [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
 ---
