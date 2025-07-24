@@ -13,17 +13,42 @@ class PlaceStatus(models.TextChoices):
 
 class Place(models.Model):
     # Main information
-    name = models.CharField("Name", max_length=255)
-    description = models.TextField("Description", blank=True)
-    location = models.PointField("Coordinates", srid=4326)
+    name = models.CharField(
+        "Name", max_length=255, help_text="The name of the place or establishment."
+    )
+    description = models.TextField(
+        "Description", blank=True, help_text="A detailed description of the location."
+    )
+    location = models.PointField(
+        "Coordinates", srid=4326, help_text="Geographic coordinates (point)."
+    )
     photo = models.ImageField(
-        "Photo", upload_to=place_photo_path, blank=True, null=True
+        "Photo",
+        upload_to=place_photo_path,
+        blank=True,
+        null=True,
+        help_text="A representative photo of the place.",
     )
 
     # Address information
-    address = models.CharField("Address", max_length=255, blank=True)
-    city = models.CharField("City", max_length=100, blank=True)
-    country = models.CharField("Country", max_length=100, blank=True)
+    address = models.CharField(
+        "Address",
+        max_length=255,
+        blank=True,
+        help_text="The specific street address of the place.",
+    )
+    city = models.CharField(
+        "City",
+        max_length=100,
+        blank=True,
+        help_text="The city where the place is located.",
+    )
+    country = models.CharField(
+        "Country",
+        max_length=100,
+        blank=True,
+        help_text="The country where the place is located.",
+    )
 
     # Status and moderating
     status = models.CharField(
@@ -31,18 +56,23 @@ class Place(models.Model):
         max_length=20,
         choices=PlaceStatus.choices,
         default=PlaceStatus.DRAFT,
+        help_text="The current moderation status of the place.",
     )
-    is_active = models.BooleanField("Active", default=True)
 
     # Meta data
-    created_at = models.DateTimeField("Created", auto_now_add=True)
-    updated_at = models.DateTimeField("Updated", auto_now=True)
+    created_at = models.DateTimeField(
+        "Created", auto_now_add=True, help_text="Timestamp when the place was created."
+    )
+    updated_at = models.DateTimeField(
+        "Updated", auto_now=True, help_text="Timestamp of the last update to the place."
+    )
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name="Author",
         null=True,
         on_delete=models.SET_NULL,
         related_name="places",
+        help_text="The user who originally created this place.",
     )
 
     class Meta:
