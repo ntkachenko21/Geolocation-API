@@ -46,7 +46,7 @@ class BaseSearchListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         ),
         OpenApiParameter(
             name="radius",
-            description="Search radius in kilometers (default: 10, max: 1000).",
+            description="Search radius in kilometers (default: 5, max: 1000).",
             required=False,
             type=float,
             location=OpenApiParameter.QUERY,

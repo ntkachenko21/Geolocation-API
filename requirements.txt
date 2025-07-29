@@ -7,6 +7,7 @@ django-cors-headers==4.7.0
 django-filter==25.1
 djangorestframework==3.16.0
 djangorestframework-gis==1.2.0
+djangorestframework_simplejwt==5.5.1
 drf-spectacular==0.28.0
 filelock==3.18.0
 GDAL @ file:///C:/Users/user/Downloads/GDAL-3.11.1-cp313-cp313-win_amd64.whl#sha256=a233e533689df3388ca990f11306dc9e68bf080c34b7460dc4b954500528187e
@@ -19,6 +20,7 @@ pillow==11.3.0
 platformdirs==4.3.8
 pre_commit==4.2.0
 psycopg2-binary==2.9.10
+PyJWT==2.10.1
 python-dotenv==1.1.1
 PyYAML==6.0.2
 referencing==0.36.2
