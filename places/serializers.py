@@ -27,6 +27,11 @@ class PlaceSerializer(GeoFeatureModelSerializer):
             "created_by",
             "distance",
         )
+        extra_kwargs = {
+            "status": {"read_only": True},
+            "created_at": {"read_only": True},
+            "updated_at": {"read_only": True},
+        }
 
     @extend_schema_field(serializers.FloatField(allow_null=True))
     def get_distance(self, obj):

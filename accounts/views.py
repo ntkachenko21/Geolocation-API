@@ -22,6 +22,7 @@ class RegistrationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
 
 
 class ProfileViewSet(viewsets.GenericViewSet):
+    queryset = User.objects.none()
     permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
