@@ -1,6 +1,7 @@
 asgiref==3.9.1
 attrs==25.3.0
 cfgv==3.4.0
+colorama==0.4.6
 distlib==0.4.0
 Django==5.2.4
 django-cors-headers==4.7.0
@@ -9,18 +10,26 @@ djangorestframework==3.16.0
 djangorestframework-gis==1.2.0
 djangorestframework_simplejwt==5.5.1
 drf-spectacular==0.28.0
+factory_boy==3.3.3
+Faker==37.5.2
 filelock==3.18.0
 GDAL @ file:///C:/Users/user/Downloads/GDAL-3.11.1-cp313-cp313-win_amd64.whl#sha256=a233e533689df3388ca990f11306dc9e68bf080c34b7460dc4b954500528187e
 identify==2.6.12
 inflection==0.5.1
+iniconfig==2.1.0
 jsonschema==4.25.0
 jsonschema-specifications==2025.4.1
 nodeenv==1.9.1
+packaging==25.0
 pillow==11.3.0
 platformdirs==4.3.8
+pluggy==1.6.0
 pre_commit==4.2.0
 psycopg2-binary==2.9.10
+Pygments==2.19.2
 PyJWT==2.10.1
+pytest==8.4.1
+pytest-django==4.11.1
 python-dotenv==1.1.1
 PyYAML==6.0.2
 referencing==0.36.2

@@ -42,6 +42,7 @@ class PlaceSerializer(GeoFeatureModelSerializer):
             return round(obj.distance.m, 2)
         return None
 
+    @extend_schema_field(UserDetailSerializer)
     def get_created_by(self, obj):
         """Returns user info based on permission level."""
         if not obj.created_by:

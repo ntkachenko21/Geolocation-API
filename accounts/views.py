@@ -27,6 +27,7 @@ class ProfileViewSet(viewsets.GenericViewSet):
 
     def get_serializer_class(self):
         action_serializers = {
+            "list": UserDetailSerializer,
             "me": UserDetailSerializer,
             "update_profile": UserUpdateSerializer,
             "change_password": ChangePasswordSerializer,
