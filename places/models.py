@@ -6,9 +6,10 @@ from places.utils import place_photo_path
 
 class PlaceStatus(models.TextChoices):
     DRAFT = "draft", "Draft"
-    PUBLISHED = "published", "Published"
     MODERATING = "moderating", "Moderating"
+    PUBLISHED = "published", "Published"
     REJECTED = "rejected", "Rejected"
+    ARCHIVED = "archived", "Archived"
 
 
 class Place(models.Model):
@@ -81,4 +82,4 @@ class Place(models.Model):
         ordering = ["-created_at"]
 
     def __str__(self):
-        return f"{self.name} - {self.city}"
+        return f"{self.name}"

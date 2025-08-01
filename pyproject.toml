@@ -23,3 +23,7 @@ known-first-party = ["GeolocationAPI"]
 
 [tool.ruff.format]
 quote-style = "double"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "GeolocationAPI.settings"
+python_files = "tests.py test_*.py *_tests.py"
