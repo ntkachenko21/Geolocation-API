@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     "rest_framework_gis",
     "drf_spectacular",
     "corsheaders",
+    "storages",
     # apps
     "accounts",
     "places",
@@ -155,9 +156,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-MEDIA_ROOT = BASE_DIR / "media/"
-MEDIA_URL = "/media/"
-
 # File upload settings
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024  # 5MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
@@ -196,7 +194,6 @@ SPECTACULAR_SETTINGS = {
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 
-
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
@@ -207,6 +204,33 @@ SIMPLE_JWT = {
     "SIGNING_KEY": SECRET_KEY,
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
+
+print(f"DEBUG: Value of USE_S3 from .env is: '{os.getenv('USE_S3')}'")
+
+if os.getenv("USE_S3", "False") == "True":
+    print("✅ S3 settings are being APPLIED.")
+    print(f"Bucket: {os.getenv('AWS_STORAGE_BUCKET_NAME')}")
+    print(f"Region: {os.getenv('AWS_S3_REGION_NAME')}")
+    print(f"Access Key: {os.getenv('AWS_ACCESS_KEY_ID')[:10]}...")
+    AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+    AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME", "eu-central-1")
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = None
+
+    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+    AWS_LOCATION = "media"
+
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
+
 
 # Logging configuration
 LOGS_DIR = BASE_DIR / "logs"
